@@ -336,7 +336,8 @@ class CustomDataset(Dataset):
             ann = self.get_ann_info(idx)
             gt_bboxes = ann['bboxes']
             gt_labels = ann['labels']
-            #gt_masks  = ann['masks']
+            if self.with_mask:
+                gt_masks  = ann['masks']
 
         def prepare_single(img, scale, flip):
             _img, border, offset = self.img_transform(
@@ -364,8 +365,9 @@ class CustomDataset(Dataset):
                 imgs.append(_img)
                 img_metas.append(DC(_img_meta, cpu_only=True))
         data = dict(img=imgs, img_meta=img_metas)
-        h,w=_img.shape[0:2]
-        gt_masks = [np.zeros([h,w])]
+        if not self.with_mask:
+            h, w = _img.shape[0:2]
+            gt_masks = [np.zeros([h, w])]
         
         if len(gt_labels)==0:
             gt_labels = np.array([-1])

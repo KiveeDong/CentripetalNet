@@ -13,7 +13,7 @@ model = dict(
         type='Centripetal_mask',
         num_classes=81,
         in_channels=256,
-        with_mask=False,
+        with_mask=True,
         ))
 # training and testing settings
 train_cfg = dict(
@@ -37,8 +37,7 @@ test_cfg = dict(
     max_per_img=100)
 # dataset settings
 dataset_type = 'CocoDataset'
-#data_root = 'data/mscoco2017/'
-data_root = '/mnt/lustre/share/DSK/datasets/mscoco2017/'
+data_root = 'data/mscoco2017/'
 img_norm_cfg = dict(
     mean=[103.53, 116.28, 123.675], std=[57.375, 57.12, 58.395], to_rgb=False)
 

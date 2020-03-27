@@ -184,7 +184,7 @@ class Centripetal_mask(nn.Module):
 
     def loss(self, tl_result, br_result, mask, mid_tl_result, mid_br_result, mid_mask, gt_bboxes, gt_labels, gt_masks, img_metas, cfg, imgscale):
         gt_tl_heatmap, gt_br_heatmap, gt_tl_offsets, gt_br_offsets, gt_tl_off_c, gt_br_off_c,\
-        gt_tl_off_c2, gt_br_off_c2 = cornerv2_target(gt_bboxes=gt_bboxes, gt_labels=gt_labels, feats=tl_result, imgscale=imgscale, direct=True, scale=1.0, dcn=True)
+        gt_tl_off_c2, gt_br_off_c2 = corner_target(gt_bboxes=gt_bboxes, gt_labels=gt_labels, feats=tl_result, imgscale=imgscale, direct=True, scale=1.0, dcn=True)
         # pred_tl_heatmap = _sigmoid(tl_result[:, :self.num_classes, :, :])
         pred_tl_heatmap = tl_result[:, :self.num_classes, :, :].sigmoid()
         pred_tl_off_c   = tl_result[:, self.num_classes:self.num_classes + 2, :, :]
